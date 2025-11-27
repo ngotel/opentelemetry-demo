@@ -23,8 +23,10 @@ def init_metrics(meter):
     rec_svc_metrics = {
         "app_recommendations_counter": app_recommendations_counter,
         "app_cache_hits_total": app_cache_hits_total,
+        "app_cache_misses_total": app_cache_misses_total,
     }
 
     return rec_svc_metrics
+
 
 
