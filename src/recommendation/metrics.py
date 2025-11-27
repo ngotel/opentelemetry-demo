@@ -27,5 +27,3 @@ def init_metrics(meter):
     }
 
     return rec_svc_metrics
-
-
