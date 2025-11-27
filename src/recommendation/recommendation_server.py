@@ -94,6 +94,7 @@ def get_product_list(request_product_ids):
                 product_ids = cached_ids
         else:
             span.set_attribute("app.recommendation.cache_enabled", False)
+            rec_svc_metrics['app_cache_misses_total'].add(1, {'cache.enabled': 'false', 'feature_flag': 'recommendationCacheFailure'})
             cat_response = product_catalog_stub.ListProducts(demo_pb2.Empty())
             product_ids = [x.id for x in cat_response.products]
 
@@ -173,5 +174,6 @@ if __name__ == "__main__":
     server.start()
     logger.info(f'Recommendation service started, listening on port {port}')
     server.wait_for_termination()
+
 
 
