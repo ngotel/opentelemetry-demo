@@ -89,6 +89,7 @@ def get_product_list(request_product_ids):
             else:
                 span.set_attribute("app.cache_hit", True)
                 logger.info("get_product_list: cache hit")
+                rec_svc_metrics['app_cache_hits_total'].add(1, {'cache.enabled': 'true', 'feature_flag': 'recommendationCacheFailure'})
                 product_ids = cached_ids
         else:
             span.set_attribute("app.recommendation.cache_enabled", False)
@@ -171,3 +172,4 @@ if __name__ == "__main__":
     server.start()
     logger.info(f'Recommendation service started, listening on port {port}')
     server.wait_for_termination()
+
